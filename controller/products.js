@@ -1,8 +1,12 @@
+const Product = require('../models/product');
+
 exports.createProduct = (req, res, next) => {
-    console.log(req.body);
-    console.log('producto creado');
+    const product = new Product(req.body.name, req.body.price);
+    product.save();
+    console.log(product);
 };
 
 exports.getAllProducts = (req, res, next) => {
-    console.log('listado completo de productos');
+    const product = Product.fetchAll();
+    console.log(product);
 };
