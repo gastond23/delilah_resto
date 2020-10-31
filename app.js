@@ -8,7 +8,7 @@ const clientRouter = require('./routes/client');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(adminRouter);
+app.use('/admin', adminRouter);
 app.use(clientRouter);
 
 app.listen(port, () => {

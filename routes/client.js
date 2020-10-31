@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/login', (req, res, next) => {
-    console.log(req.body);
-});
+const productsController = require('../controller/products');
+
+const usersController = require('../controller/users');
+
+router.get('/login', usersController.loginUser);
+
+router.get('/products', productsController.getAllProducts);
 
 module.exports = router;
