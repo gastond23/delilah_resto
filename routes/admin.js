@@ -6,3 +6,4 @@ const productsController = require('../controller/products');
 router.post('/add-product', productsController.createProduct);
 
 module.exports = router;
+
