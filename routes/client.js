@@ -9,4 +9,6 @@ router.get('/login', usersController.loginUser);
 
 router.get('/products', productsController.getAllProducts);
 
+router.get('/product', productsController.getProduct);
+
 module.exports = router;
