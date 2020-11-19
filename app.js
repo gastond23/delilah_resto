@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 app.use((req, res, next) => {
     User.findByPk(1)
         .then(user => {
-            console.log(user);
+            //console.log(user);
             req.user = user;
             next();
         })
@@ -67,6 +67,9 @@ sequelize
     })
     .then(user => {
         //console.log(user);
+        return user.createOrder();
+    })
+    .then(order => {
         app.listen(port, () => {
             console.log(`API Server is running on port ${port}.`);
         });
