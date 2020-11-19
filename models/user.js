@@ -12,7 +12,7 @@ const User = sequelize.define('user', {
     name: Sequelize.STRING,
     email: Sequelize.STRING,
     adress: Sequelize.STRING,
-    phone: Sequelize.INTEGER
+    phone: Sequelize.STRING
 });
 
 module.exports = User;
