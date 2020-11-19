@@ -1,11 +1,12 @@
 const Order = require('../models/order');
-const OrderItem = require('../models/order-item');
+const orderItem = require('../models/order-item');
 const Product = require('../models/product');
 
 exports.postOrder = (req, res, next) => {
     const prodId = req.body.id;
     console.log(prodId);
     let fetchedOrder;
+    let newQuantity = 1;
     req.user.getOrder()
         .then(order => {
             fetchedOrder = order;
@@ -20,21 +21,19 @@ exports.postOrder = (req, res, next) => {
             if (products.length > 0) {
                 product = products[0];
             }
-            let newQuantity = 1;
             if (product) {
-                //...
+                const oldQuantity = product.orderItem.quantity;
+                newQuantity = oldQuantity + 1;
+                return product;
             }
-            return Product.findByPk(prodId)
-                .then(product => {
-                    return fetchedOrder.addProduct(product, {
-                        through: {
-                            quantity: newQuantity
-                        }
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+            return Product.findByPk(prodId);
+        })
+        .then(product => {
+            return fetchedOrder.addProduct(product, {
+                through: {
+                    quantity: newQuantity
+                }
+            });
         })
         .catch(err => {
             console.log(err);
