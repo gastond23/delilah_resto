@@ -1,42 +1,47 @@
-const Product = require('../models/product');
+const Product = require("../models/product");
 
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    Product.create({
-        title: title,
-        price: price,
-        imageUrl: imageUrl,
-        description: description
-    }).then(result => {
-        console.log(result);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    req.user
+        .createProduct({
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            description: description,
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 exports.getAllProducts = (req, res, next) => {
-    Product.findAll()
-        .then(products => {
+    req.user.getProducts()
+    //Product.findAll()
+        .then((products) => {
             res.json(products);
-        }).catch(err => {
+        })
+        .catch((err) => {
             console.log(err);
         });
 };
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.body.id;
-    Product.findByPk(prodId)
-    .then(product => {
-        res.json(product);
-    })
-    .catch(err => {
-        res.json(err);
-    })
-}
+    req.user.getProducts({where: {id: prodId}})
+    //Product.findByPk(prodId)
+        .then((product) => {
+            res.json(product);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+};
 
 exports.updateProduct = (req, res, next) => {
     const prodId = req.body.id;
@@ -45,26 +50,26 @@ exports.updateProduct = (req, res, next) => {
     const updateImgUrl = req.body.imageUrl;
     const updateDescription = req.body.description;
     Product.findByPk(prodId)
-    .then(product => {
-        product.title = updateTitle;
-        product.price = updatePrice;
-        product.imageUrl = updateImgUrl;
-        product.description = updateDescription;
-        product.save();
-        res.json(product);
-    })
-    .catch(err => {
-        console.log(err);
-    })
-}
+        .then((product) => {
+            product.title = updateTitle;
+            product.price = updatePrice;
+            product.imageUrl = updateImgUrl;
+            product.description = updateDescription;
+            product.save();
+            res.json(product);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
 
 exports.deleteProduct = (req, res, next) => {
     const prodId = req.body.id;
     Product.findByPk(prodId)
-    .then(product => {
-        product.destroy();
-    })
-    .catch(err => {
-        console.log(err);
-    })
-}
+        .then((product) => {
+            product.destroy();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};

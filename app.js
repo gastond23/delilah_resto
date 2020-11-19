@@ -18,19 +18,20 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use('/admin', adminRouter);
-app.use(clientRouter);
-
 app.use((req, res, next) => {
     User.findByPk(1)
-    .then(user => {
-        req.user = user;
-        next();
-    })
-    .catch(err => {
-        console.log(err);
-    });
+        .then(user => {
+            console.log(user);
+            req.user = user;
+            next();
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
+
+app.use('/admin', adminRouter);
+app.use(clientRouter);
 
 Product.belongsTo(User, {
     constraints: true,
