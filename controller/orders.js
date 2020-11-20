@@ -51,3 +51,26 @@ exports.getOrder = (req, res, next) => {
         console.log(err);
     });
 }
+
+exports.orderDeleteProduct = (req, res, next) => {
+    const prodId = req.body.prodId;
+    req.user
+        .getOrder()
+        .then(order => {
+            return order.getProducts({
+                where: {
+                    id: prodId
+                }
+            });
+        })
+        .then(products => {
+            const product = products[0];
+            product.orderItem.destroy();
+        })
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}

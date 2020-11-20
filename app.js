@@ -18,18 +18,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use((req, res, next) => {
-    User.findByPk(1)
-        .then(user => {
-            //console.log(user);
-            req.user = user;
-            next();
-        })
-        .catch(err => {
-            console.log(err);
-        });
-});
-
 app.use('/admin', adminRouter);
 app.use(clientRouter);
 
@@ -51,25 +39,6 @@ sequelize
     //.sync({ force: true })
     .sync()
     .then(result => {
-        //console.log(result);
-        return User.findByPk(1);
-    })
-    .then(user => {
-        if (!user) {
-            return User.create({
-                name: 'Gaston',
-                email: 'gaston.dandre@gmail.com',
-                adress: 'Huanquero 8',
-                phone: 2995279180
-            })
-        }
-        return user;
-    })
-    .then(user => {
-        //console.log(user);
-        return user.createOrder();
-    })
-    .then(order => {
         app.listen(port, () => {
             console.log(`API Server is running on port ${port}.`);
         });

@@ -7,16 +7,19 @@ const usersController = require('../controller/users');
 
 const orderController = require('../controller/orders');
 
-router.get('/login', usersController.loginUser);
 
 router.get('/products', productsController.getAllProducts);
 
-router.get('/product', productsController.getProduct);
+router.get('/products', productsController.getProduct);
 
-router.get('/order', orderController.getOrder);
+router.get('/pedido', orderController.getOrder);
 
-router.post('/crear-pedido', orderController.postOrder);
+router.post('/pedido', orderController.postOrder);
 
 //router.get('/detalle-pedido', orderController.orderDetail);
+
+router.delete('/pedido', orderController.orderDeleteProduct);
+
+router.post('/usuario', usersController.crearUsuario);
 
 module.exports = router;
