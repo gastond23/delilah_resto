@@ -22,4 +22,6 @@ router.delete('/pedido', orderController.orderDeleteProduct);
 
 router.post('/usuario', usersController.crearUsuario);
 
+router.post('/login', usersController.loginUsuario);
+
 module.exports = router;
