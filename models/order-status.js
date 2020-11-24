@@ -2,16 +2,14 @@ const Sequelize = require('sequelize');
 
 const sequelize = require('../data/database');
 
-const Order = sequelize.define('order', {
-    id: {
+const OrderStatus = sequelize.define('orderStatus', {
+    id_order_status: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: true,
         primaryKey: true
     },
-    date: Sequelize.DATE,
-    id_order_status: Sequelize.INTEGER(1),
-    id_pay_status: Sequelize.INTEGER(1)
+    status: Sequelize.STRING
 });
 
-module.exports = Order;
+module.exports = OrderStatus;

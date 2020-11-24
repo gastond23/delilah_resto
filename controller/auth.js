@@ -14,7 +14,7 @@ exports.userOk = (req, res, next) => {
             User.findByPk(userId)
                 .then((user) => {
                     req.user = user;
-                    next()
+                    next();
                 }).catch(err => {
                     console.log(err);
                 });

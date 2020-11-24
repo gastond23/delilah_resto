@@ -12,6 +12,8 @@ const Product = require('./models/product');
 const User = require('./models/user');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
+const OrderStatus = require('./models/order-status');
+const PayStatus = require('./models/pay-status');
 
 
 app.use(bodyParser.urlencoded({
@@ -32,13 +34,15 @@ Order.belongsTo(User);
 Order.belongsToMany(Product, {
     through: OrderItem
 });
+Order.hasMany(OrderStatus);
+Order.hasMany(PayStatus);
 Product.belongsToMany(Order, {
     through: OrderItem
 });
 
 sequelize
-    //.sync({ force: true })
-    .sync()
+    .sync({ force: true })
+    //.sync()
     .then(result => {
         app.listen(port, () => {
             console.log(`API Server is running on port ${port}.`);
