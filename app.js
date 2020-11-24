@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use('/admin', adminRouter);
+
+app.use(adminRouter);
 app.use(clientRouter);
 
 Product.belongsTo(User, {

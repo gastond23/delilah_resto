@@ -50,7 +50,9 @@ exports.crearUsuario = (req, res, next) => {
 exports.loginUsuario = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+    const headers = req.headers;
     var usuarioLog;
+    console.log(headers);
     User.findOne({
             where: {
                 email: email
@@ -81,4 +83,14 @@ exports.loginUsuario = (req, res, next) => {
                     console.log(err);
                 });
         })
+}
+
+exports.verUsers = (req, res, next) => {
+    User.findAll()
+    .then(data => {
+        return res.status(200).json({msg: 'GET Usuarios Ok!', usuarios: data});
+    })
+    .catch(err => {
+        return res.status(400).send('Error 404, no existen usuarios.');
+    })
 }

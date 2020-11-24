@@ -5,15 +5,14 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    req.user
-        .createProduct({
+    req.user.createProduct({
             title: title,
             price: price,
             imageUrl: imageUrl,
             description: description,
         })
-        .then((result) => {
-            console.log(result);
+        .then((data) => {
+            res.status(200).json({msg: 'Producto creado!', product: data});
         })
         .catch((err) => {
             console.log(err);
@@ -21,8 +20,7 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getAllProducts = (req, res, next) => {
-    req.user.getProducts()
-    //Product.findAll()
+    Product.findAll()
         .then((products) => {
             res.json(products);
         })
@@ -33,8 +31,12 @@ exports.getAllProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.body.id;
-    req.user.getProducts({where: {id: prodId}})
-    //Product.findByPk(prodId)
+    Product.findByPk({
+            where: {
+                id: prodId
+            }
+        })
+        //Product.findByPk(prodId)
         .then((product) => {
             res.json(product);
         })
