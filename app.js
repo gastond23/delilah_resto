@@ -34,15 +34,15 @@ Order.belongsTo(User);
 Order.belongsToMany(Product, {
     through: OrderItem
 });
-Order.hasMany(OrderStatus);
-Order.hasMany(PayStatus);
+Order.belongsTo(OrderStatus);
+Order.belongsTo(PayStatus);
 Product.belongsToMany(Order, {
     through: OrderItem
 });
 
 sequelize
-    .sync({ force: true })
-    //.sync()
+    //.sync({ force: true })
+    .sync()
     .then(result => {
         app.listen(port, () => {
             console.log(`API Server is running on port ${port}.`);

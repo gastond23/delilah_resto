@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/user');
 
+
 const {
     jwt,
     firma
@@ -50,9 +51,7 @@ exports.crearUsuario = (req, res, next) => {
 exports.loginUsuario = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    const headers = req.headers;
     var usuarioLog;
-    console.log(headers);
     User.findOne({
             where: {
                 email: email
@@ -60,6 +59,7 @@ exports.loginUsuario = (req, res, next) => {
         })
         .then(user => {
             usuarioLog = user;
+            console.log(user);
             if (!user) {
                 return res.status(400).send('Email / usuario inexistente.');
             }

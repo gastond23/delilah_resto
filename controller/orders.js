@@ -4,11 +4,18 @@ const Product = require('../models/product');
 
 exports.postOrder = (req, res, next) => {
     const prodId = req.body.id;
+    const payId = req.body.payId;
     console.log(prodId);
     let fetchedOrder;
     let newQuantity = 1;
     req.user.getOrder()
         .then(order => {
+            if (order == null) {
+                req.user.createOrder({
+                    orderStatusId: 1,
+                    payStatusId: payId
+                })
+            }
             fetchedOrder = order;
             return order.getProducts({
                 where: {
@@ -34,6 +41,22 @@ exports.postOrder = (req, res, next) => {
                     quantity: newQuantity
                 }
             });
+        })
+        .then(order => {
+            orderItem.findAll({
+                    where: {
+                        orderId: fetchedOrder.id
+                    }
+                })
+                .then(orderDetail => {
+                    return res.status(200).json({
+                        msg: 'Order Detail',
+                        order_items: orderDetail
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         })
         .catch(err => {
             console.log(err);

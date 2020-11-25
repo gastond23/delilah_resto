@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../data/database');
 
 const PayStatus = sequelize.define('payStatus', {
-    id_pay_status: {
+    id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,

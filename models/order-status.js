@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../data/database');
 
 const OrderStatus = sequelize.define('orderStatus', {
-    id_order_status: {
+    id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: true,
