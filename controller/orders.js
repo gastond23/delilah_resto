@@ -91,9 +91,32 @@ exports.orderDeleteProduct = (req, res, next) => {
             product.orderItem.destroy();
         })
         .then(result => {
-            res.json(result);
+            res.status(200).json({
+                msg: 'Product Deleted',
+                order_detail: result
+            });
         })
         .catch(err => {
             console.log(err);
         });
+}
+
+exports.updateOrderStatus = (req, res, next) => {
+    const orderId = req.body.orderId;
+    const statusId = parseInt(req.body.statusId);
+    Order.findByPk(orderId)
+        .then(order => {
+            order.orderStatusId = statusId;
+            order.save();
+            return res.status(200).json({
+                msg: 'Order Status Updated!',
+                order: order
+            });
+        })
+        .catch(err => {
+            res.status(400).json({
+                msg: 'Error log, try again!',
+                data: err
+            })
+        })
 }
