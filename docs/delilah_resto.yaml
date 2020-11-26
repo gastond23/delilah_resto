@@ -1,0 +1,302 @@
+openapi: 3.0.0
+servers: 
+  - description: ServidorLocal
+    url: http://localhost:3000
+  
+info:
+  title: Delilah Resto
+  version: 1.0.0
+  description: API para pedidos de comida deliciosa. Como cliente, podés registrarte, ver el listado de nuestros productos y hacer una orden. Los administradores del restaurante tienen la posibilidad de recibir pedidos y actualizarlos.
+
+tags:
+- name: products
+  description: Todo sobre nuestros productos
+- name: pedido
+  description: Acceso a los pedidos de clientes
+- name: usuario
+  description: Operaciones sobre los clientes
+- name: login
+  description: Operacion para loguearse
+
+paths:
+  /productos:
+    get:
+      tags:
+      - productos
+      summary: Ver listado de productos del menú
+      operationId: verProductos
+      responses:
+        '200':
+          description: Lista de productos traídos exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:  
+                  $ref: '#/components/schemas/Products'
+        '404':
+          description: Error 404. Lista de productos no encontrada.
+    post:
+      tags:
+      - productos
+      summary: Agregar un nuevo producto al menú
+      operationId: postAddProduct
+      requestBody:
+        required: true
+        content:
+          multipart/mixed:
+            schema:
+              $ref: '#/components/schemas/Product'
+            encoding:
+              imagen:
+                contentType: image/png, image/jpeg
+      responses:
+        '200':
+          description: Producto agregado exitosamente.
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/Product'
+        '400':
+          description: El producto ingresado ya existe, intentá con otro.
+        '400':
+          description: Error 400. Intente nuevamente.
+  /productos/{productoId}:
+    get:
+      tags:
+      - productos
+      summary: Ver un producto por su Id
+      operationId: getProduct
+      parameters: 
+      - in: path
+        name: getProduct
+        schema:
+          type: integer
+        description: ID del producto a buscar
+        required: true
+      responses:
+        '200':
+          description: Producto traído exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+        '404':
+          description: Error 404. Producto no encontrado
+        '400':
+          description: Error 400. Intente nuevamente
+    put:
+      tags:
+      - productos
+      summary: Editar un producto por su ID
+      operationId: updateProduct
+      parameters: 
+      - in: path
+        name: productoId
+        required: true
+        content:
+          multipart/mixed:
+            schema:
+              $ref: '#/components/schemas/Producto'
+            encoding:
+              imagen:
+                contentType: image/png, image/jpeg
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+        '404':
+          description: Error 404. El producto ingresado no existe. No se actualizó ningun producto
+        '400':
+          description: Error 400. Intente nuevamente
+    delete:
+      tags:
+      - productos
+      summary: Elimina un producto por su ID
+      operationId: deleteProduct
+      parameters:
+      - in: path
+        name: productId
+        schema:
+          type: object
+          properties:
+            id_producto:
+              type: integer
+        required: true
+        description: Producto a eliminarse
+      responses:
+        '200':
+          description: Producto eliminado exitosamente
+        '404':
+          description: Error 404. El producto ingresado no existe. No se actualizó ningun producto
+        '400':
+          description: Error 400. Intente nuevamente
+  /usuario:
+    get:
+      tags:
+      - usuario
+      summary: Ver listado de usuarios
+      operationId: verUsers
+      responses:
+        '200':
+          description: Usuarios traídos exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:  
+                  $ref: '#/components/schemas/Usuarios'
+        '404':
+          description: Error 404. Lista de usuarios no encontrada
+  /usuario/signup:
+    post:
+      tags:
+      - usuario
+      summary: Registro del usuario en el sistema
+      operationId: crearUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+      responses:
+        '200':
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '400':
+          description: Error 400. Usuario no creado
+  /usuario/login:
+    post:
+      tags:
+      - usuario
+      summary: Logueo del usuario al sistema
+      operationId: logInUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioLogin'
+      responses:
+        "200":
+          description: Usuario logueado exitosamente
+        "400":
+          description: Error 400. Intente nuevamente
+        "400":
+          descripcion: La contraseña ingresada es incorrecta. Intentá otra vez
+        "404":
+          description: Error 404. El usuario ingresado no existe, intentá con otro o registrate para acceder
+  /pedidos:
+    get:
+      tags:
+      - pedidos
+      summary: Ver listado de pedidos
+      operationId: verPedidos
+      responses:
+        '200':
+          description: Pedidos traídos exitosamente
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Pedidos'
+        '404':
+          description: Error 404. Lista de pedidos no encontrada
+        '400':
+          description: Error 400. Intente nuevamente
+    post:
+      tags:
+      - pedidos
+      summary: Agregar un nuevo pedido
+      operationId: postOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/PedidoNuevo'
+      responses:
+        '200':
+          description: Pedido creado exitosamente
+        '400':
+          description: Error 400. Pedido no creado
+  /pedidos/{pedidoId}:
+    get:
+      tags:
+      - pedidos
+      summary: Ver un pedido por su Id
+      operationId: getOrder
+      parameters: 
+      - in: path
+        name: orderId
+        schema:
+          type: integer
+        description: ID del pedido a buscar
+        required: true
+      responses:
+        '200':
+          description: Pedido traído exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '404':
+          description: Error 404. Pedido no encontrado
+        '400':
+          description: Error 400. Intente nuevamente
+    put:
+      tags:
+      - pedidos
+      summary: Modificar estado del pedido
+      operationId: updateOrderStatus
+      parameters: 
+      - in: path
+        name: orderId
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PedidoEstado'
+      responses:
+        '200':
+          description: Estado del pedido actualizado exitosamente
+        '404':
+          description: Error 404. Pedido no encontrado
+        '400':
+          description: Error 400. Intente nuevamente
+  
+components:
+  schemas:
+    Pedidos:
+      type: object
+      properties:
+        id_pedido:
+          type: integer
+          description: ID del pedido
+          example: 5
+        fecha_pedido:
+          type: date
+          description: fecha y hora del pedido
+          example: 2020-11-26T05:12:07.000Z
+        estado:
+          type: string
+          description: Estado actual del producto
+          enum:
+            - NEW
+            - ACCEPTED
+            - PROCESSING
+            - SENDING
+            - DELIVERED
+            - CANCELLED
+
+externalDocs:
+  description: Explorá la API acá
+  url: https://github.com/gastond23/delilah_resto
