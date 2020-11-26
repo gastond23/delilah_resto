@@ -1,1 +1,0 @@
-SELECT * FROM delilah_resto.orders;

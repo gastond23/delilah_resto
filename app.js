@@ -44,8 +44,8 @@ Product.belongsToMany(Order, {
 });
 
 sequelize
-    //.sync({ force: true })
-    .sync()
+    .sync({ force: true })
+    //.sync()
     .then(result => {
         app.listen(process.env.APP_PORT, () => {
             console.log(`API Server is running on port ${process.env.APP_PORT}.`);
