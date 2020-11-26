@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "91a303ee-d1ed-4eeb-a0de-e5dfd76ef840",
+		"name": "API DelilaH Resto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Agregar Producto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJpZCI6MSwibmFtZSI6Ikdhc3RvbiBEYW5kcmUiLCJlbWFpbCI6Imdhc3Rvbi5kYW5kcmVAZ21haWwuY29tIiwiYWRyZXNzIjoiSHVhbnF1ZXJvIDgiLCJwaG9uZSI6IjI5OTUyNzkxODAiLCJwYXNzd29yZCI6IiQyYSQxMiRIL1QyalhLNXpCWkRucEs0Sm9zakhlbkM0NWxaMXFXL01ZenEvYjZJbDJzSlp4Qm5jdlAxaSIsImFkbWluIjoxLCJjcmVhdGVkQXQiOiIyMDIwLTExLTI0VDAzOjUxOjE5LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTExLTI0VDAzOjUxOjE5LjAwMFoifSwiaWF0IjoxNjA2MTkwMDM1fQ.DQiH1nFhibXHcSokruhMAPrzwfHrdw6e7x33_BkOxTM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Sanwich Milanesa",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "230.99",
+							"type": "text"
+						},
+						{
+							"key": "imageUrl",
+							"value": "http://www.elsanwichito.com",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "La mejor milanga",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				},
+				"description": "Agregado de producto"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "andres",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "gil",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Login Api\n"
+			},
+			"response": []
+		},
+		{
+			"name": "GET PRODUCTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJpZCI6MSwibmFtZSI6Ikdhc3RvbiBEYW5kcmUiLCJlbWFpbCI6Imdhc3Rvbi5kYW5kcmVAZ21haWwuY29tIiwiYWRyZXNzIjoiSHVhbnF1ZXJvIDgiLCJwaG9uZSI6IjI5OTUyNzkxODAiLCJwYXNzd29yZCI6IiQyYSQxMiQwTUZrYmFuS3ZKYm5yVmtHeDg5Ni91MFdRZ2p6Z1d4TVF5N2JsLjhqVkl2OU9YZ3pEYUdZTyIsImNyZWF0ZWRBdCI6IjIwMjAtMTEtMjNUMDY6Mjg6MjYuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjAtMTEtMjNUMDY6Mjg6MjYuMDAwWiJ9LCJpYXQiOjE2MDYxMTg3MjZ9.I9DX96xjeKvO_QXs4n1v4AIcChwXAHYB08FiDHMPQs8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:3000/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener producto por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Gaston Dandre",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "gaston.dandre@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "adress",
+							"value": "Huanquero 8",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "2995279180",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "betsabeXl23",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "gaston.dandre@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "betsabeXl23",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Pedido",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJpZCI6MSwibmFtZSI6Ikdhc3RvbiBEYW5kcmUiLCJlbWFpbCI6Imdhc3Rvbi5kYW5kcmVAZ21haWwuY29tIiwiYWRyZXNzIjoiSHVhbnF1ZXJvIDgiLCJwaG9uZSI6IjI5OTUyNzkxODAiLCJwYXNzd29yZCI6IiQyYSQxMiRKaFVIUFNERU15dktuM0FEeFFiWXJPclVST2dpSWprbS44YmxvVU9YWUduT2lXWkRkNnh1cSIsImFkbWluIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIwLTExLTI0VDA2OjM0OjA1LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTExLTI0VDA2OjM0OjA1LjAwMFoifSwiaWF0IjoxNjA2MTk5NjUwfQ.y41vEUKSZjtmCzwh8x-QR1Ct8qaHUPfYWZECjbOmtdk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "payId",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar estado pedido",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJpZCI6MSwibmFtZSI6Ikdhc3RvbiBEYW5kcmUiLCJlbWFpbCI6Imdhc3Rvbi5kYW5kcmVAZ21haWwuY29tIiwiYWRyZXNzIjoiSHVhbnF1ZXJvIDgiLCJwaG9uZSI6IjI5OTUyNzkxODAiLCJwYXNzd29yZCI6IiQyYSQxMiRXQ1VITlpmTzRrNG92Y0d6WFI1d0gubjVUSUtqQUk1ZTZndTU0UkpYbExpUGJjV2JnV0RDTyIsImFkbWluIjoxLCJjcmVhdGVkQXQiOiIyMDIwLTExLTI1VDA0OjIzOjM4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTExLTI1VDA0OjIzOjM4LjAwMFoifSwiaWF0IjoxNjA2MjgxODg5fQ.nPhLzcRH0oRAbowYXmYr1Q2wFcpEurnjrnCnRdIN9vA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "orderId",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "statusId",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "12a5e02c-b697-412e-aa9d-5242d9111609",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1136eb5d-d8f7-46ae-a394-e042893d57ff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
