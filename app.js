@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const dotenv = require('dotenv');
+
+
 
 const sequelize = require('./data/database');
 
@@ -20,6 +22,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+dotenv.config();
 
 app.use(adminRouter);
 app.use(clientRouter);
@@ -44,8 +47,8 @@ sequelize
     //.sync({ force: true })
     .sync()
     .then(result => {
-        app.listen(port, () => {
-            console.log(`API Server is running on port ${port}.`);
+        app.listen(process.env.APP_PORT, () => {
+            console.log(`API Server is running on port ${process.env.APP_PORT}.`);
         });
     })
     .catch(err => {
